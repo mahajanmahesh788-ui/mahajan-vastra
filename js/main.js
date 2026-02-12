@@ -150,24 +150,84 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // FAQ Accordion
+    // FAQ Accordion - Complete Solution
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all FAQ items
     const faqItems = document.querySelectorAll('.faq-item');
     
-    faqItems.forEach(item => {
+    // Check if FAQ items exist
+    if (faqItems.length === 0) {
+        console.log('❌ No FAQ items found');
+        return;
+    }
+    
+    console.log(`✅ Found ${faqItems.length} FAQ items`);
+    
+    // Add click event to each FAQ question
+    faqItems.forEach((item, index) => {
         const question = item.querySelector('.faq-question');
         
-        question.addEventListener('click', function() {
+        if (!question) {
+            console.log(`❌ No question found for item ${index + 1}`);
+            return;
+        }
+        
+        // Add click event listener
+        question.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log(`🔍 FAQ ${index + 1} clicked`);
+            
             // Close all other FAQ items
-            faqItems.forEach(otherItem => {
+            faqItems.forEach((otherItem, otherIndex) => {
                 if (otherItem !== item) {
                     otherItem.classList.remove('active');
+                    console.log(`🔍 Closed FAQ ${otherIndex + 1}`);
                 }
             });
             
             // Toggle current item
+            const isActive = item.classList.contains('active');
             item.classList.toggle('active');
+            
+            console.log(`🔍 FAQ ${index + 1} is now ${isActive ? 'closed' : 'open'}`);
+        });
+        
+        // Add keyboard support
+        question.setAttribute('tabindex', '0');
+        question.setAttribute('role', 'button');
+        question.setAttribute('aria-expanded', 'false');
+        
+        question.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                question.click();
+            }
         });
     });
+    
+    // Update aria-expanded when active class changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                const question = target.querySelector('.faq-question');
+                if (question) {
+                    const isActive = target.classList.contains('active');
+                    question.setAttribute('aria-expanded', isActive);
+                }
+            }
+        });
+    });
+    
+    // Observe all FAQ items for class changes
+    faqItems.forEach(item => {
+        observer.observe(item, { attributes: true });
+    });
+    
+    console.log('✅ FAQ accordion setup complete!');
+});
     
     // Contact form handling
     const contactForm = document.getElementById('contactForm');
