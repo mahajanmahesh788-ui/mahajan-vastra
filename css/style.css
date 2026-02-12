@@ -1321,11 +1321,12 @@ ul {
 
 .hero-logo-img {
     width: 150px !important; 
-    height: 70px !important;
-    box-shadow: var(--shadow-sm);
+    height: 100px !important;
+    box-shadow: var(--shadow-md);
     transition: var(--transition-fast);
+    object-fit: contain;
     max-width: 150px !important;
-    max-height: 70px !important;
+    max-height: 100px !important;
 }
 
 .hero-logo-img:hover {

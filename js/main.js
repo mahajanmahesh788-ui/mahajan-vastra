@@ -255,37 +255,62 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Simulate form submission
+        // Get submit button
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
         
-        // Simulate API call
-        setTimeout(() => {
-            // In a real implementation, you would send this data to your server
-            // For now, we'll simulate a successful submission
+        // Check if running on a web server (not file:// protocol)
+        const isWebServer = window.location.protocol !== 'file:';
+        
+        // Always use WhatsApp for now since FormSubmit.co requires server setup
+        // You can change this to true when deploying to a real web server
+        const useWhatsApp = true; // Set to false when you have a real web server
+        
+        if (isWebServer && !useWhatsApp) {
+            // Try FormSubmit.co first (works on web servers)
+            console.log('=== FORM SUBMISSION DEBUG ===');
+            console.log('Submitting to:', contactForm.action);
+            console.log('Form data:', Object.fromEntries(formData));
+            console.log('Current URL:', window.location.href);
             
-            // Create WhatsApp message
-            const whatsappMessage = `Hello Mahajan Vastra,\n\n` +
-                `Name: ${name}\n` +
-                `Phone: ${phone}\n` +
-                `Service: ${service}\n` +
-                `Message: ${message || 'No additional message'}\n\n` +
-                `Please contact me regarding vastra stitching services.`;
+            // Submit to FormSubmit.co
+            contactForm.submit();
             
-            // Open WhatsApp with pre-filled message
-            const whatsappUrl = `https://wa.me/919888823840?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappUrl, '_blank');
+            // Show success message after submission
+            setTimeout(() => {
+                // Simple success message instead of missing function
+                alert('Thank you for your inquiry! We will contact you soon. Jai Shree Krishna! 🕉️');
+                contactForm.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
             
-            // Reset form and button
-            contactForm.reset();
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            
-            alert('Thank you for your inquiry! We have opened WhatsApp for you to send your message directly.');
-        }, 2000);
+        } else {
+            // Use WhatsApp backup (works when opening HTML files directly)
+            setTimeout(() => {
+                // Create WhatsApp message
+                const whatsappMessage = `Hello Mahajan Vastra,\n\n` +
+                    `Name: ${name}\n` +
+                    `Phone: ${phone}\n` +
+                    `Service: ${service}\n` +
+                    `Message: ${message || 'No additional message'}\n\n` +
+                    `Please contact me regarding vastra stitching services.`;
+                
+                // Open WhatsApp with pre-filled message
+                const whatsappUrl = `https://wa.me/919888823840?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                // Reset form and button
+                contactForm.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                alert('Thank you for your inquiry! We have opened WhatsApp for you to send your message directly.');
+            }, 2000);
+        }
     });
     
     // Intersection Observer for animations
