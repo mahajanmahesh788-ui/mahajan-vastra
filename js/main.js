@@ -4,20 +4,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const header = document.getElementById('header');
     
     // Toggle mobile menu
     navToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
         document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        
+        // Add animation class
+        if (navMenu.classList.contains('active')) {
+            navMenu.style.animation = 'slideInRight 0.4s ease';
+        }
     });
     
     // Close mobile menu when clicking on links
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get target section
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                // Calculate scroll position with header offset
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                // Scroll to section
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu after a short delay to allow scroll to start
+                setTimeout(() => {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
         });
     });
     
@@ -30,28 +57,58 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Smooth scrolling for navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId.startsWith('#')) {
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    const headerHeight = document.getElementById('header').offsetHeight;
-                    const targetPosition = targetSection.offsetTop - headerHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+    // Active link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    
+    window.addEventListener('scroll', function() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
             }
         });
     });
     
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Add hover effect for mobile menu
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+        });
+    });
+    
     // Header scroll effect
-    const header = document.getElementById('header');
     let lastScrollTop = 0;
     
     window.addEventListener('scroll', function() {
@@ -267,7 +324,97 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('💬 WhatsApp integration ready');
     console.log('🗺️ Directions functionality active');
     console.log('🏪 JustDial integration ready (placeholder URL)');
-}
+    
+    // Image Popup Modal
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalDirection = document.getElementById('modalDirection');
+    const closeModal = document.querySelector('.close-modal');
+    
+    // Gallery image click handlers
+    function setupGalleryClicks() {
+        console.log('Setting up gallery clicks...');
+        
+        document.querySelectorAll('.gallery-item img, .gallery-item-horizontal img').forEach(img => {
+            console.log('Found gallery image:', img.src);
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Gallery image clicked!', this.src);
+                openImageModal(this);
+            });
+        });
+        
+        // Also try broader selector
+        document.querySelectorAll('img[data-title]').forEach(img => {
+            console.log('Found image with data-title:', img.src);
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Data-title image clicked!', this.src);
+                openImageModal(this);
+            });
+        });
+    }
+    
+    // Setup clicks immediately
+    setupGalleryClicks();
+    
+    // Also setup after a delay to ensure all images are loaded
+    setTimeout(setupGalleryClicks, 500);
+    setTimeout(setupGalleryClicks, 1000);
+    setTimeout(setupGalleryClicks, 2000);
+    
+    function openImageModal(imgElement) {
+        // Get data attributes
+        const title = imgElement.dataset.title || imgElement.alt;
+        const link = imgElement.dataset.link || '#';
+        
+        // Set modal content
+        modalImage.src = imgElement.src;
+        modalImage.alt = imgElement.alt;
+        modalTitle.textContent = title;
+        modalDescription.textContent = `Beautiful vastra from ${title}`;
+        
+        // Set directions button link
+        if (link && link !== '#') {
+            modalDirection.href = link;
+            modalDirection.style.display = 'inline-block';
+        } else {
+            modalDirection.href = '#';
+            modalDirection.style.display = 'none';
+        }
+        
+        // Show modal
+        imageModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Close modal handlers
+    closeModal.addEventListener('click', function() {
+        imageModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Close modal when clicking outside
+    imageModal.addEventListener('click', function(e) {
+        if (e.target === imageModal) {
+            imageModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            imageModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
 });
 
 // Utility functions
