@@ -1,0 +1,313 @@
+/* ===== MOBILE NAVIGATION ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Navigation Toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Toggle mobile menu
+    navToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+    
+    // Close mobile menu when clicking on links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+        
+        // Add background to header on scroll
+        if (scrollTop > 50) {
+            header.style.background = 'rgba(255, 253, 247, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+        } else {
+            header.style.background = 'rgba(255, 253, 247, 0.95)';
+            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        }
+    });
+    
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', function() {
+            // Close all other FAQ items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
+    
+    // Contact form handling
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const phone = formData.get('phone');
+        const service = formData.get('service');
+        const message = formData.get('message');
+        
+        // Simple validation
+        if (!name || !phone || !service) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        
+        // Phone number validation (Indian format)
+        const phoneRegex = /^[6-9]\d{9}$/;
+        if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
+            alert('Please enter a valid Indian phone number.');
+            return;
+        }
+        
+        // Simulate form submission
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            // In a real implementation, you would send this data to your server
+            // For now, we'll simulate a successful submission
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello Mahajan Vastra,\n\n` +
+                `Name: ${name}\n` +
+                `Phone: ${phone}\n` +
+                `Service: ${service}\n` +
+                `Message: ${message || 'No additional message'}\n\n` +
+                `Please contact me regarding vastra stitching services.`;
+            
+            // Open WhatsApp with pre-filled message
+            const whatsappUrl = `https://wa.me/919888823840?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form and button
+            contactForm.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            alert('Thank you for your inquiry! We have opened WhatsApp for you to send your message directly.');
+        }, 2000);
+    });
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fadeInUp');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.service-card, .review-card, .about-content, .contact-content');
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // Click-to-call functionality enhancement
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+    phoneLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Track phone clicks (you can add analytics here)
+            console.log('Phone link clicked:', this.href);
+        });
+    });
+    
+    // WhatsApp click tracking
+    const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me/"]');
+    whatsappLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Track WhatsApp clicks
+            console.log('WhatsApp link clicked:', this.href);
+        });
+    });
+    
+    // Directions link tracking
+    const directionsLinks = document.querySelectorAll('.directions-link');
+    directionsLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Track directions clicks
+            console.log('Directions link clicked');
+        });
+    });
+    
+    // Add loading animation to images
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('load', function() {
+            this.classList.add('loaded');
+        });
+        
+        if (img.complete) {
+            img.classList.add('loaded');
+        }
+    });
+    
+    // Simulate loading Google Business photos
+    setTimeout(() => {
+        const imageContainer = document.querySelector('.hero-image .image-container');
+        if (imageContainer) {
+            imageContainer.style.opacity = '1';
+            imageContainer.style.transform = 'translateY(0)';
+        }
+    }, 500);
+    
+    // JustDial link handling (placeholder - replace with actual JustDial URL)
+    const justDialLink = document.getElementById('justDialLink');
+    const justDialSocial = document.getElementById('justDialSocial');
+    
+    // Replace with your actual JustDial business URL
+    const justDialBusinessUrl = "https://www.justdial.com/Pathankot/Mahajan-God-Idols-Dresses-Stitchingvastra-And-Kids-Tuition-Centre/9999PX186-X186-250906003901-H6Y4_BZDET";
+    
+    if (justDialLink) {
+        justDialLink.href = justDialBusinessUrl;
+        justDialLink.addEventListener('click', function(e) {
+            // Track JustDial clicks
+            console.log('JustDial link clicked');
+            // You can add analytics tracking here
+        });
+    }
+    
+    if (justDialSocial) {
+        justDialSocial.href = justDialBusinessUrl;
+        justDialSocial.addEventListener('click', function(e) {
+            // Track JustDial social clicks
+            console.log('JustDial social link clicked');
+        });
+    }
+    
+    console.log('🕉️ Mahajan Vastra website loaded successfully!');
+    console.log('📱 Mobile navigation ready');
+    console.log('📞 Click-to-call functionality active');
+    console.log('💬 WhatsApp integration ready');
+    console.log('🗺️ Directions functionality active');
+    console.log('🏪 JustDial integration ready (placeholder URL)');
+}
+});
+
+// Utility functions
+function formatPhoneNumber(phone) {
+    // Remove all non-digits
+    const cleaned = phone.replace(/\D/g, '');
+    
+    // Handle Indian phone numbers
+    if (cleaned.length === 10) {
+        return `+91${cleaned}`;
+    } else if (cleaned.length === 12 && cleaned.startsWith('91')) {
+        return `+${cleaned}`;
+    }
+    
+    return cleaned;
+}
+
+function validatePhoneNumber(phone) {
+    const cleaned = phone.replace(/\D/g, '');
+    return /^[6-9]\d{9}$/.test(cleaned);
+}
+
+function createWhatsAppMessage(data) {
+    return `Hello Mahajan Vastra,\n\n` +
+        `Name: ${data.name}\n` +
+        `Phone: ${data.phone}\n` +
+        `Service: ${data.service}\n` +
+        `Message: ${data.message || 'No additional message'}\n\n` +
+        `Please contact me regarding vastra stitching services.`;
+}
+
+// Service worker registration (for PWA functionality)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('ServiceWorker registration successful');
+            })
+            .catch(function(err) {
+                console.log('ServiceWorker registration failed');
+            });
+    });
+}

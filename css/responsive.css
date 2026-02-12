@@ -1,0 +1,536 @@
+/* ===== MOBILE RESPONSIVE STYLES ===== */
+
+/* Tablet Styles (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .nav-container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .hero-container {
+        padding: 0 var(--spacing-sm);
+        gap: var(--spacing-xl);
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-content,
+    .contact-content {
+        gap: var(--spacing-xl);
+    }
+    
+    .services-grid,
+    .reviews-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+    }
+}
+
+/* Mobile Styles (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Typography Adjustments */
+    html {
+        font-size: 14px;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.4rem; }
+    h4 { font-size: 1.2rem; }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-title::after {
+        width: 50px;
+    }
+    
+    /* Header Mobile */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: rgba(255, 253, 247, 0.98);
+        backdrop-filter: blur(10px);
+        transition: var(--transition-medium);
+        z-index: 1001;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-xl);
+    }
+    
+    .nav-link {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 1.1rem;
+        border-radius: var(--radius-lg);
+    }
+    
+    .nav-toggle {
+        display: flex;
+        z-index: 1002;
+    }
+    
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Hero Section Mobile */
+    .hero {
+        padding: 100px 0 60px;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .hero-features {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .feature-item {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .hero-image {
+        order: -1;
+    }
+    
+    .image-container img {
+        height: 300px;
+    }
+    
+    /* About Section Mobile */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+    
+    .about-text h3 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .about-image {
+        text-align: center;
+    }
+    
+    .about-image img {
+        height: 300px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .about-badge {
+        position: static;
+        margin: var(--spacing-md) auto 0;
+        display: inline-block;
+    }
+    
+    /* Services Section Mobile */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .service-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .services-cta .btn {
+        max-width: 280px;
+    }
+    
+    /* Reviews Section Mobile */
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .review-card {
+        padding: var(--spacing-lg);
+    }
+    
+    /* Contact Section Mobile */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+    
+    .contact-info h3 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .contact-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contact-actions .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    /* FAQ Section Mobile */
+    .faq-question h4 {
+        font-size: 1rem;
+    }
+    
+    .faq-answer p {
+        font-size: 0.9rem;
+    }
+    
+    /* Footer Mobile */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        text-align: center;
+    }
+    
+    .footer-section {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-md);
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+    
+    /* Back to Top Mobile */
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* Small Mobile Styles (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Typography Adjustments */
+    html {
+        font-size: 13px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    /* Container Adjustments */
+    .container {
+        padding: 0 var(--spacing-xs);
+    }
+    
+    .nav-container {
+        padding: 0 var(--spacing-xs);
+    }
+    
+    .hero-container {
+        padding: 0 var(--spacing-xs);
+    }
+    
+    /* Hero Section Small Mobile */
+    .hero {
+        padding: 90px 0 50px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        font-size: 0.9rem;
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+    
+    .image-container img {
+        height: 250px;
+    }
+    
+    .overlay-text {
+        font-size: 1rem;
+    }
+    
+    /* About Section Small Mobile */
+    .about-text h3 {
+        font-size: 1.6rem;
+    }
+    
+    .about-image img {
+        height: 250px;
+    }
+    
+    .highlight-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .highlight-item i {
+        margin: 0;
+    }
+    
+    /* Services Section Small Mobile */
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    /* Contact Section Small Mobile */
+    .contact-info h3 {
+        font-size: 1.6rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .contact-item i {
+        margin: 0 auto;
+    }
+    
+    .contact-form {
+        padding: var(--spacing-lg);
+    }
+    
+    /* FAQ Section Small Mobile */
+    .faq-question {
+        padding: var(--spacing-md);
+    }
+    
+    .faq-question h4 {
+        font-size: 0.95rem;
+    }
+    
+    .faq-answer p {
+        font-size: 0.85rem;
+    }
+    
+    /* Footer Small Mobile */
+    .footer-logo h3 {
+        font-size: 1.3rem;
+    }
+    
+    .footer-section h4 {
+        font-size: 1.1rem;
+    }
+    
+    .footer-links a {
+        font-size: 0.9rem;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.8rem;
+    }
+    
+    .badge {
+        font-size: 0.7rem;
+        padding: 3px var(--spacing-xs);
+    }
+}
+
+/* Large Mobile Styles (min-width: 481px) and (max-width: 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .btn {
+        width: auto;
+        max-width: none;
+    }
+    
+    .hero-features {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .feature-item {
+        width: auto;
+        max-width: none;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .contact-actions .btn {
+        width: auto;
+        max-width: none;
+    }
+}
+
+/* Tablet Landscape Styles (min-width: 769px) and (max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large Desktop Styles (min-width: 1400px) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .nav-container,
+    .hero-container {
+        max-width: 1400px;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 3rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-xxl);
+    }
+    
+    .reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-xxl);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .header,
+    .scroll-indicator,
+    .back-to-top,
+    .hero-features,
+    .contact-actions,
+    .footer-social {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .hero,
+    .about,
+    .services,
+    .reviews,
+    .contact,
+    .faq {
+        background: white !important;
+        padding: 20px 0 !important;
+    }
+    
+    .btn {
+        background: #f0f0f0 !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-item {
+        width: 240px;
+        height: 300px;
+    }
+}
