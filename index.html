@@ -132,7 +132,13 @@
                             <a href="#services" class="nav-link">Services</a>
                         </li>
                         <li class="nav-item">
+                            <a href="#gallery" class="nav-link">Gallery</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#reviews" class="nav-link">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#faq" class="nav-link">FAQ</a>
                         </li>
                         <li class="nav-item">
                             <a href="#contact" class="nav-link">Contact</a>
@@ -157,6 +163,7 @@
                     Sacred Vastra for 
                     <span class="highlight">Divine Idols</span>
                 </h1>
+                <p class="hero-since">Serving devotees since 2008</p>
                 <p class="hero-description">    <strong>
                     We offer sacred vastra stitching for all deities, crafted with purity, devotion, and utmost care.
                     This is not just a service, but sevaa — where cleanliness, perfect fitting, and graceful finishing come first.
@@ -324,6 +331,7 @@
     <div class="gallery-header">
         <h2>Divine Vastra Gallery</h2>
         <p>Handcrafted sacred dresses for divine idols</p>
+        <p class="gallery-swipe-hint" aria-hidden="true"><i class="fas fa-arrows-alt-h"></i> Swipe to see more</p>
     </div>
 
     <div class="gallery-scroll">
@@ -561,12 +569,15 @@
                     <h3>Visit Our Sacred Space</h3>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div>
+                        <div class="contact-location-wrap">
                             <h4>Location</h4>
                             <p>House No S, Mohalla Karam Singh, 19/3923<br>Pathankot, Punjab 145001</p>
                             <a href="https://maps.google.com/?q=House+No+S,+Mohalla+Karam+Singh,+19%2F3923,+Pathankot,+Punjab+145001" target="_blank" class="directions-link">
                                 <i class="fas fa-directions"></i> Get Directions
                             </a>
+                            <div class="contact-map-embed">
+                                <iframe src="https://www.google.com/maps?q=House+No+S,+Mohalla+Karam+Singh,+19%2F3923,+Pathankot,+Punjab+145001&z=16&output=embed" title="Mahajan God Idols Dresses Stitching - Pathankot location" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -685,7 +696,7 @@
                 <h3 id="modalTitle">Image Title</h3>
                 <p id="modalDescription">Image description</p>
                 <a id="modalDirection" href="#" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-map-marker-alt"></i> Get Directions
+                    <i class="fas fa-map-marker-alt"></i> <span id="modalDirectionText">View location</span>
                 </a>
             </div>
         </div>
@@ -749,11 +760,15 @@
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalDescription').textContent = `Beautiful vastra from ${title}`;
             
-            // Set directions button link
+            // Set directions button link and label
             const directionBtn = document.getElementById('modalDirection');
+            const directionText = document.getElementById('modalDirectionText');
             if (link && link !== '#') {
                 directionBtn.href = link;
-                directionBtn.style.display = 'inline-block';
+                directionBtn.style.display = 'inline-flex';
+                if (directionText) {
+                    directionText.textContent = (link.indexOf('maps.google') !== -1 || link.indexOf('google.com/maps') !== -1) ? 'Get Directions' : 'View location';
+                }
             } else {
                 directionBtn.href = '#';
                 directionBtn.style.display = 'none';
@@ -887,7 +902,9 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -923,7 +940,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p>&copy; 2024 Mahajan God Idols Dresses Stitching (Vastra). All rights reserved.</p>
+                    <p>Since 2008 &copy; <span id="footerYear"></span> Mahajan God Idols Dresses Stitching (Vastra). All rights reserved.</p>
                     <div class="footer-badges">
                         <span class="badge">Women-Owned</span>
                         <span class="badge">LGBTQ+ Friendly</span>
@@ -942,6 +959,12 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Sticky WhatsApp (mobile only) -->
+    <a href="https://wa.me/919888823840" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-float-text">Chat</span>
+    </a>
+
     <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
@@ -955,6 +978,8 @@
             once: true,
             offset: 100
         });
+        var footerYearEl = document.getElementById('footerYear');
+        if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
         
         // FAQ Accordion - Backup script
         document.addEventListener('DOMContentLoaded', function() {

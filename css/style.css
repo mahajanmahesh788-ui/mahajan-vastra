@@ -500,6 +500,13 @@ ul {
     background-clip: text;
 }
 
+.hero-since {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+    font-style: italic;
+}
+
 .hero-description {
     font-size: 1.1rem;
     color: var(--text-medium);
@@ -1596,6 +1603,11 @@ ul {
     box-shadow: var(--shadow-lg);
 }
 
+/* ===== STICKY WHATSAPP (MOBILE ONLY) ===== */
+.whatsapp-float {
+    display: none;
+}
+
 /* ===== THANK YOU POPUP ===== */
 .thank-you-popup {
     position: fixed;
@@ -1748,6 +1760,10 @@ ul {
 .gallery-header p {
     color: #666;
     font-size: 1rem;
+}
+
+.gallery-swipe-hint {
+    display: none;
 }
 
 /* scroll container */
@@ -1916,4 +1932,20 @@ ul {
 
 .gallery-scroll::-webkit-scrollbar-thumb:hover {
     background: var(--accent-orange);
+}
+
+/* Contact map embed */
+.contact-map-embed {
+    margin-top: 1rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 153, 51, 0.2);
+}
+
+.contact-map-embed iframe {
+    display: block;
+    width: 100%;
+    height: 220px;
+    border: 0;
 }

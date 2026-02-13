@@ -465,10 +465,14 @@ document.addEventListener('DOMContentLoaded', function() {
         modalTitle.textContent = title;
         modalDescription.textContent = `Beautiful vastra from ${title}`;
         
-        // Set directions button link
+        // Set directions button link and label
+        const modalDirectionText = document.getElementById('modalDirectionText');
         if (link && link !== '#') {
             modalDirection.href = link;
-            modalDirection.style.display = 'inline-block';
+            modalDirection.style.display = 'inline-flex';
+            if (modalDirectionText) {
+                modalDirectionText.textContent = (link.indexOf('maps.google') !== -1 || link.indexOf('google.com/maps') !== -1) ? 'Get Directions' : 'View location';
+            }
         } else {
             modalDirection.href = '#';
             modalDirection.style.display = 'none';
@@ -501,7 +505,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
 // Utility functions
 function formatPhoneNumber(phone) {
     // Remove all non-digits
