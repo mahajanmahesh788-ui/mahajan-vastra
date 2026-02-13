@@ -852,6 +852,102 @@ ul {
     margin-bottom: var(--spacing-md);
 }
 
+/* ===== WHY CHOOSE US SECTION ===== */
+.why-choose-us {
+    padding: var(--spacing-xxl) 0;
+    background: var(--bg-cream);
+}
+
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.why-choose-card {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    transition: var(--transition-medium);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 153, 51, 0.1);
+    position: relative;
+}
+
+.why-choose-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-spiritual);
+    border-color: var(--primary-saffron);
+}
+
+.why-choose-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    font-size: 1.8rem;
+    box-shadow: var(--shadow-md);
+}
+
+.why-choose-card h3 {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-devanagari);
+}
+
+.why-choose-text-en {
+    font-size: 1rem;
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.7;
+}
+
+.why-choose-text-hi {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-family: var(--font-devanagari);
+}
+
+/* Important card styling */
+.why-choose-important {
+    border: 2px solid var(--primary-saffron);
+    background: linear-gradient(135deg, rgba(255, 153, 51, 0.05), rgba(255, 215, 0, 0.05));
+}
+
+.why-choose-important .why-choose-icon {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-spiritual);
+}
+
+.why-choose-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    padding: 6px 14px;
+    border-radius: var(--radius-lg);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow-md);
+    z-index: 1;
+}
+
+.why-choose-badge i {
+    font-size: 0.9rem;
+}
+
 /* ===== REVIEWS SECTION ===== */
 .reviews {
     padding: var(--spacing-xxl) 0;

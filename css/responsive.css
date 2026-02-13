@@ -199,6 +199,35 @@
         max-width: 280px;
     }
     
+    /* Why Choose Us Section Mobile */
+    .why-choose-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .why-choose-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .why-choose-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .why-choose-text-en {
+        font-size: 0.95rem;
+    }
+    
+    .why-choose-text-hi {
+        font-size: 0.9rem;
+    }
+    
+    .why-choose-badge {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+        top: -10px;
+        right: 15px;
+    }
+    
     /* Reviews Section Mobile */
     .reviews-grid {
         grid-template-columns: 1fr;
@@ -435,6 +464,10 @@
         grid-template-columns: repeat(2, 1fr);
     }
     
+    .why-choose-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .reviews-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -453,6 +486,10 @@
 /* Tablet Landscape Styles (min-width: 769px) and (max-width: 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .why-choose-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
@@ -487,6 +524,11 @@
     .services-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--spacing-xxl);
+    }
+    
+    .why-choose-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-xl);
     }
     
     .reviews-grid {
@@ -560,35 +602,95 @@
         display: none;
     }
     
-    .gallery-item {
-        width: 240px;
-        height: 300px;
+    /* Mobile gallery improvements */
+    .gallery {
+        padding: 40px 10px;
     }
     
-    /* Mobile gallery: swipe hint and right-edge fade */
-    .gallery-swipe-hint {
-        display: block;
-        text-align: center;
-        margin-top: 8px;
-        margin-bottom: 12px;
+    .gallery-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .gallery-header p {
         font-size: 0.9rem;
-        color: var(--text-light);
     }
-    .gallery-swipe-hint i {
-        margin-right: 6px;
-        color: var(--primary-saffron);
+    
+    .gallery-row {
+        gap: 12px;
+        padding-bottom: 15px;
     }
+    
+    .gallery-item {
+        width: 180px;
+        height: 180px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gallery-item-horizontal {
+        width: 200px;
+        height: 160px;
+        border-radius: 12px;
+    }
+    
     .gallery-scroll {
         position: relative;
+        padding: 0 5px;
+        margin: 0 -5px;
     }
+    
     .gallery-scroll::after {
         content: '';
         position: absolute;
         top: 0;
         right: 0;
-        width: 48px;
+        width: 60px;
         height: 100%;
-        background: linear-gradient(to left, rgba(255, 248, 239, 0.98), transparent);
+        background: linear-gradient(to left, rgba(255, 248, 239, 1), transparent);
         pointer-events: none;
+        z-index: 1;
+    }
+    
+    /* Mobile gallery: swipe hint */
+    .gallery-swipe-hint {
+        display: block;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 16px;
+        font-size: 0.85rem;
+        color: var(--text-light);
+        font-weight: 500;
+    }
+    .gallery-swipe-hint i {
+        margin-right: 6px;
+        color: var(--primary-saffron);
+        animation: pulse-horizontal 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-horizontal {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
+    }
+    
+    .gallery-overlay h4 {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    
+    /* Better scrollbar visibility on mobile */
+    .gallery-scroll::-webkit-scrollbar {
+        height: 6px;
+    }
+    
+    .gallery-scroll::-webkit-scrollbar-thumb {
+        background: var(--primary-saffron);
+        border-radius: 10px;
+    }
+    
+    /* Prevent text selection while swiping */
+    .gallery-item {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
     }
 }
