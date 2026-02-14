@@ -118,7 +118,7 @@
     }
     
     .nav-toggle.active .bar:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
+        transform: rotate(-45deg) translate(-3px, 4px);
     }
     
     .nav-toggle.active .bar:nth-child(2) {
@@ -126,7 +126,7 @@
     }
     
     .nav-toggle.active .bar:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
+        transform: rotate(45deg) translate(-3px, -4px);
     }
     
     /* Hero Section Mobile */

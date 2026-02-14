@@ -192,7 +192,7 @@ ul {
 }
 
 .nav-logo h1 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--white);
     margin: 0;
@@ -203,7 +203,7 @@ ul {
     padding: 0.5rem 1rem;
     border-radius: var(--radius-lg);
     display: inline-block;
-    white-space: nowrap;
+    white-space: pre-wrap;
 }
 
 .nav-logo h1:hover {
@@ -416,51 +416,45 @@ ul {
     transform: scale(1.1);
 }
 
-/* Enhanced Hamburger Menu */
+/* Enhanced Hamburger Menu (top-right side menu icon) */
 .nav-toggle {
     position: relative;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--primary-saffron), var(--primary-gold));
-    border-radius: 12px;
-    border: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(255, 153, 51, 0.2);
+    box-shadow: 0 1px 6px rgba(255, 153, 51, 0.2);
     transition: all 0.3s ease;
     z-index: 1001;
 }
 
 .bar {
-    width: 25px;
-    height: 3px;
+    width: 14px;
+    height: 2px;
     background: var(--white);
-    margin: 3px 0;
-    border-radius: 2px;
+    margin: 2px 0;
+    border-radius: 1px;
     transition: all 0.3s ease;
 }
 
-/* Mobile Menu Animation */
+/* Mobile Menu Animation (X when open) */
 .nav-toggle.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(4px, 4px);
     background: var(--primary-saffron);
 }
 
 .nav-toggle.active .bar:nth-child(2) {
     opacity: 0;
-    transform: translateX(20px);
-    transform: translateX(20px);
+    transform: translateX(10px);
 }
 
 .nav-toggle.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
+    transform: rotate(-45deg) translate(4px, -4px);
     background: var(--primary-saffron);
 }
 
@@ -487,11 +481,9 @@ ul {
         padding-right: 58px;
     }
     .nav-logo h1 {
-        font-size: 0.85rem;
+        font-size: 1.05rem;
         padding: 0.35rem 0.4rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: pre-wrap;
         max-width: 100%;
     }
     .nav-toggle {
