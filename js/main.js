@@ -1,60 +1,45 @@
 /* ===== MOBILE NAVIGATION ===== */
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation Toggle
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
+    const navBackdrop = document.getElementById('nav-backdrop');
     const navLinks = document.querySelectorAll('.nav-link');
     const header = document.getElementById('header');
     
-    // Toggle mobile menu
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
-        
-        // Add animation class
-        if (navMenu.classList.contains('active')) {
-            navMenu.style.animation = 'slideInRight 0.4s ease';
-        }
+    function openMenu() {
+        navMenu.classList.add('active');
+        navToggle.classList.add('active');
+        if (navBackdrop) navBackdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        if (navBackdrop) navBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    navToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (navMenu.classList.contains('active')) closeMenu();
+        else openMenu();
     });
-    
-    // Close mobile menu when clicking on links
+    if (navBackdrop) navBackdrop.addEventListener('click', closeMenu);
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            var href = this.getAttribute('href');
+            if (!href || href === '#' || href.charAt(0) !== '#') return;
             e.preventDefault();
-            
-            // Get target section
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
+            var targetId = href.substring(1);
+            var targetSection = document.getElementById(targetId);
+            closeMenu();
             if (targetSection) {
-                // Calculate scroll position with header offset
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-                
-                // Scroll to section
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+                var headerHeight = header ? header.offsetHeight : 0;
+                var targetPosition = targetSection.offsetTop - headerHeight;
+                requestAnimationFrame(function() {
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 });
-                
-                // Close mobile menu after a short delay to allow scroll to start
-                setTimeout(() => {
-                    navMenu.classList.remove('active');
-                    navToggle.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }, 300);
             }
         });
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
     });
     
     // Active link highlighting
@@ -78,57 +63,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Smooth scrolling for navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Add hover effect for mobile menu
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(5px)';
-        });
-        
-        link.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0)';
-        });
-    });
-    
-    // Header scroll effect
-    let lastScrollTop = 0;
-    
+    // Header always visible (no hide on scroll). On desktop, lighten background on scroll; on mobile keep gradient so hamburger stays visible.
     window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.style.transform = 'translateY(-100%)';
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (window.innerWidth > 768) {
+            if (scrollTop > 50) {
+                header.style.background = 'rgba(255, 253, 247, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 253, 247, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
         } else {
-            header.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollTop = scrollTop;
-        
-        // Add background to header on scroll
-        if (scrollTop > 50) {
-            header.style.background = 'rgba(255, 253, 247, 0.98)';
-            header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-        } else {
-            header.style.background = 'rgba(255, 253, 247, 0.95)';
-            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            header.style.boxShadow = scrollTop > 50 ? '0 2px 20px rgba(0,0,0,0.1)' : '0 2px 10px rgba(0,0,0,0.1)';
         }
     });
     
@@ -150,59 +97,52 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // FAQ Accordion - Complete Solution
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all FAQ items
+    // FAQ Accordion functionality
     const faqItems = document.querySelectorAll('.faq-item');
+    const faqQuestions = document.querySelectorAll('.faq-question');
     
-    // Check if FAQ items exist
     if (faqItems.length === 0) {
-        console.log('❌ No FAQ items found');
+        // No FAQ items found
         return;
     }
     
-    console.log(`✅ Found ${faqItems.length} FAQ items`);
-    
-    // Add click event to each FAQ question
-    faqItems.forEach((item, index) => {
-        const question = item.querySelector('.faq-question');
-        
-        if (!question) {
-            console.log(`❌ No question found for item ${index + 1}`);
-            return;
-        }
-        
-        // Add click event listener
-        question.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+    // Add click event listeners to FAQ questions
+    faqQuestions.forEach((question, index) => {
+        question.addEventListener('click', function() {
+            const faqItem = this.closest('.faq-item');
+            const faqAnswer = faqItem.querySelector('.faq-answer');
+            const icon = this.querySelector('i');
             
-            console.log(`🔍 FAQ ${index + 1} clicked`);
+            if (!faqAnswer) {
+                return;
+            }
             
             // Close all other FAQ items
             faqItems.forEach((otherItem, otherIndex) => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    console.log(`🔍 Closed FAQ ${otherIndex + 1}`);
+                if (otherIndex !== index) {
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    const otherIcon = otherItem.querySelector('.faq-question i');
+                    
+                    if (otherAnswer && otherIcon) {
+                        otherItem.classList.remove('active');
+                        otherAnswer.style.maxHeight = '0';
+                        otherAnswer.style.opacity = '0';
+                        otherIcon.style.transform = 'rotate(0deg)';
+                    }
                 }
             });
             
-            // Toggle current item
-            const isActive = item.classList.contains('active');
-            item.classList.toggle('active');
+            // Toggle current FAQ item
+            faqItem.classList.toggle('active');
             
-            console.log(`🔍 FAQ ${index + 1} is now ${isActive ? 'closed' : 'open'}`);
-        });
-        
-        // Add keyboard support
-        question.setAttribute('tabindex', '0');
-        question.setAttribute('role', 'button');
-        question.setAttribute('aria-expanded', 'false');
-        
-        question.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                question.click();
+            if (faqItem.classList.contains('active')) {
+                faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+                faqAnswer.style.opacity = '1';
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                faqAnswer.style.maxHeight = '0';
+                faqAnswer.style.opacity = '0';
+                icon.style.transform = 'rotate(0deg)';
             }
         });
     });
@@ -225,222 +165,125 @@ document.addEventListener('DOMContentLoaded', function() {
     faqItems.forEach(item => {
         observer.observe(item, { attributes: true });
     });
-    
-    console.log('✅ FAQ accordion setup complete!');
 });
-    
-    // Contact form handling
+
+// Contact form handling
+document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const phone = formData.get('phone');
-        const service = formData.get('service');
-        const message = formData.get('message');
-        
-        // Simple validation
-        if (!name || !phone || !service) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-        
-        // Phone number validation (Indian format)
-        const phoneRegex = /^[6-9]\d{9}$/;
-        if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
-            alert('Please enter a valid Indian phone number.');
-            return;
-        }
-        
-        // Get submit button
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
-        
-        // Check if running on a web server (not file:// protocol)
-        const isWebServer = window.location.protocol !== 'file:';
-        
-        // Always use WhatsApp for now since FormSubmit.co requires server setup
-        // You can change this to true when deploying to a real web server
-        const useWhatsApp = true; // Set to false when you have a real web server
-        
-        if (isWebServer && !useWhatsApp) {
-            // Try FormSubmit.co first (works on web servers)
-            console.log('=== FORM SUBMISSION DEBUG ===');
-            console.log('Submitting to:', contactForm.action);
-            console.log('Form data:', Object.fromEntries(formData));
-            console.log('Current URL:', window.location.href);
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Submit to FormSubmit.co
-            contactForm.submit();
+            // Get form data
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const phone = formData.get('phone');
+            const service = formData.get('service');
+            const message = formData.get('message');
             
-            // Show success message after submission
-            setTimeout(() => {
-                // Simple success message instead of missing function
-                alert('Thank you for your inquiry! We will contact you soon. Jai Shree Krishna! 🕉️');
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+            // Simple validation
+            if (!name || !phone || !service) {
+                alert('Please fill in all required fields.');
+                return;
+            }
             
-        } else {
-            // Use WhatsApp backup (works when opening HTML files directly)
-            setTimeout(() => {
-                // Create WhatsApp message
-                const whatsappMessage = `Hello Mahajan Vastra,\n\n` +
-                    `Name: ${name}\n` +
-                    `Phone: ${phone}\n` +
-                    `Service: ${service}\n` +
-                    `Message: ${message || 'No additional message'}\n\n` +
-                    `Please contact me regarding vastra stitching services.`;
+            // Phone number validation (Indian format)
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
+                alert('Please enter a valid Indian phone number.');
+                return;
+            }
+            
+            // Get submit button
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Check if running on a web server (not file:// protocol)
+            const isWebServer = window.location.protocol !== 'file:';
+            
+            // Always use WhatsApp for now since FormSubmit.co requires server setup
+            const useWhatsApp = true;
+            
+            if (isWebServer && !useWhatsApp) {
+                // Try FormSubmit.co first (works on web servers)
+                contactForm.submit();
                 
-                // Open WhatsApp with pre-filled message
-                const whatsappUrl = `https://wa.me/919888823840?text=${encodeURIComponent(whatsappMessage)}`;
-                window.open(whatsappUrl, '_blank');
+                // Show success message after submission
+                setTimeout(() => {
+                    alert('Thank you for your inquiry! We will contact you soon. Jai Shree Krishna! 🕉️');
+                    contactForm.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
                 
-                // Reset form and button
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                
-                alert('Thank you for your inquiry! We have opened WhatsApp for you to send your message directly.');
-            }, 2000);
-        }
-    });
-    
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-fadeInUp');
+            } else {
+                // Use WhatsApp backup (works when opening HTML files directly)
+                setTimeout(() => {
+                    // Create WhatsApp message
+                    const whatsappMessage = `Hello Mahajan Vastra,\n\n` +
+                        `Name: ${name}\n` +
+                        `Phone: ${phone}\n` +
+                        `Service: ${service}\n` +
+                        `Message: ${message || 'No additional message'}\n\n` +
+                        `Please contact me regarding vastra stitching services.`;
+                    
+                    // Open WhatsApp with pre-filled message
+                    const whatsappUrl = `https://wa.me/919888823840?text=${encodeURIComponent(whatsappMessage)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Reset form and button
+                    contactForm.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    alert('Thank you for your inquiry! We have opened WhatsApp for you to send your message directly.');
+                }, 2000);
             }
         });
-    }, observerOptions);
+    }
+});
+
+// Parallax Scrolling Effect
+document.addEventListener('DOMContentLoaded', function() {
+    const parallaxContainer = document.querySelector('.parallax-container');
+    const parallaxLayers = document.querySelectorAll('.parallax-layer');
     
-    // Observe elements for animation
-    const animatedElements = document.querySelectorAll('.service-card, .review-card, .about-content, .contact-content');
-    animatedElements.forEach(el => observer.observe(el));
-    
-    // Click-to-call functionality enhancement
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    phoneLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Track phone clicks (you can add analytics here)
-            console.log('Phone link clicked:', this.href);
-        });
-    });
-    
-    // WhatsApp click tracking
-    const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me/"]');
-    whatsappLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Track WhatsApp clicks
-            console.log('WhatsApp link clicked:', this.href);
-        });
-    });
-    
-    // Directions link tracking
-    const directionsLinks = document.querySelectorAll('.directions-link');
-    directionsLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Track directions clicks
-            console.log('Directions link clicked');
-        });
-    });
-    
-    // Add loading animation to images
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        img.addEventListener('load', function() {
-            this.classList.add('loaded');
-        });
-        
-        if (img.complete) {
-            img.classList.add('loaded');
-        }
-    });
-    
-    // Simulate loading Google Business photos
-    setTimeout(() => {
-        const imageContainer = document.querySelector('.hero-image .image-container');
-        if (imageContainer) {
-            imageContainer.style.opacity = '1';
-            imageContainer.style.transform = 'translateY(0)';
-        }
-    }, 500);
-    
-    // JustDial link handling (placeholder - replace with actual JustDial URL)
-    const justDialLink = document.getElementById('justDialLink');
-    const justDialSocial = document.getElementById('justDialSocial');
-    
-    // Replace with your actual JustDial business URL
-    const justDialBusinessUrl = "https://www.justdial.com/Pathankot/Mahajan-God-Idols-Dresses-Stitchingvastra-And-Kids-Tuition-Centre/9999PX186-X186-250906003901-H6Y4_BZDET";
-    
-    if (justDialLink) {
-        justDialLink.href = justDialBusinessUrl;
-        justDialLink.addEventListener('click', function(e) {
-            // Track JustDial clicks
-            console.log('JustDial link clicked');
-            // You can add analytics tracking here
+    if (parallaxContainer && parallaxLayers.length > 0) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            parallaxLayers.forEach((layer, index) => {
+                const speed = layer.dataset.speed || 0.5;
+                const yPos = -(scrolled * speed);
+                layer.style.transform = `translateY(${yPos}px)`;
+            });
         });
     }
-    
-    if (justDialSocial) {
-        justDialSocial.href = justDialBusinessUrl;
-        justDialSocial.addEventListener('click', function(e) {
-            // Track JustDial social clicks
-            console.log('JustDial social link clicked');
-        });
-    }
-    
-    console.log('🕉️ Mahajan Vastra website loaded successfully!');
-    console.log('📱 Mobile navigation ready');
-    console.log('📞 Click-to-call functionality active');
-    console.log('💬 WhatsApp integration ready');
-    console.log('🗺️ Directions functionality active');
-    console.log('🏪 JustDial integration ready (placeholder URL)');
-    
-    // Image Popup Modal
-    const imageModal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDescription = document.getElementById('modalDescription');
-    const modalDirection = document.getElementById('modalDirection');
-    const closeModal = document.querySelector('.close-modal');
-    
+});
+
+// Gallery functionality
+document.addEventListener('DOMContentLoaded', function() {
     // Gallery image click handlers
     function setupGalleryClicks() {
-        console.log('Setting up gallery clicks...');
-        
         document.querySelectorAll('.gallery-item img, .gallery-item-horizontal img').forEach(img => {
-            console.log('Found gallery image:', img.src);
             img.style.cursor = 'pointer';
             img.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Gallery image clicked!', this.src);
                 openImageModal(this);
             });
         });
         
         // Also try broader selector
         document.querySelectorAll('img[data-title]').forEach(img => {
-            console.log('Found image with data-title:', img.src);
             img.style.cursor = 'pointer';
             img.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Data-title image clicked!', this.src);
                 openImageModal(this);
             });
         });
@@ -451,60 +294,70 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Also setup after a delay to ensure all images are loaded
     setTimeout(setupGalleryClicks, 500);
-    setTimeout(setupGalleryClicks, 1000);
-    setTimeout(setupGalleryClicks, 2000);
-    
-    function openImageModal(imgElement) {
-        // Get data attributes
-        const title = imgElement.dataset.title || imgElement.alt;
-        const link = imgElement.dataset.link || '#';
-        
-        // Set modal content
-        modalImage.src = imgElement.src;
-        modalImage.alt = imgElement.alt;
-        modalTitle.textContent = title;
-        modalDescription.textContent = `Beautiful vastra from ${title}`;
-        
-        // Set directions button link and label
-        const modalDirectionText = document.getElementById('modalDirectionText');
-        if (link && link !== '#') {
-            modalDirection.href = link;
-            modalDirection.style.display = 'inline-flex';
-            if (modalDirectionText) {
-                modalDirectionText.textContent = (link.indexOf('maps.google') !== -1 || link.indexOf('google.com/maps') !== -1) ? 'Get Directions' : 'View location';
-            }
-        } else {
-            modalDirection.href = '#';
-            modalDirection.style.display = 'none';
-        }
-        
-        // Show modal
-        imageModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    // Close modal handlers
-    closeModal.addEventListener('click', function() {
-        imageModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-    
-    // Close modal when clicking outside
-    imageModal.addEventListener('click', function(e) {
-        if (e.target === imageModal) {
-            imageModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
-    
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            imageModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
 });
+
+// Image modal functionality
+function openImageModal(img) {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    
+    const modalImg = document.getElementById('modalImage');
+    const caption = document.getElementById('modalCaption');
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    if (modalImg) modalImg.src = img.src;
+    if (caption) caption.textContent = img.alt || img.getAttribute('data-title') || '';
+}
+
+// Close modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('imageModal');
+    const closeBtn = document.querySelector('.close-modal');
+    
+    if (modal) {
+        // Close on X button click
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+});
+
+// JustDial link handling (placeholder - replace with actual JustDial URL)
+const justDialLink = document.getElementById('justDialLink');
+const justDialSocial = document.getElementById('justDialSocial');
+
+// Replace with your actual JustDial business URL
+const justDialBusinessUrl = "https://www.justdial.com/Pathankot/Mahajan-God-Idols-Dresses-Stitchingvastra-And-Kids-Tuition-Centre/9999PX186-X186-250906003901-H6Y4_BZDET";
+
+if (justDialLink) {
+    justDialLink.href = justDialBusinessUrl;
+    justDialLink.addEventListener('click', function(e) {
+        // Track JustDial clicks
+        // You can add analytics tracking here
+    });
+}
+
 // Utility functions
 function formatPhoneNumber(phone) {
     // Remove all non-digits
@@ -539,10 +392,10 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
-                console.log('ServiceWorker registration successful');
+                // ServiceWorker registration successful
             })
             .catch(function(err) {
-                console.log('ServiceWorker registration failed');
+                // ServiceWorker registration failed
             });
     });
 }

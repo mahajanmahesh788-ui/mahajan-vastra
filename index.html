@@ -123,42 +123,62 @@
                 <div class="nav-menu" id="nav-menu">
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a href="#home" class="nav-link">Home</a>
+                            <a href="#home" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#about" class="nav-link">About</a>
+                            <a href="#about" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#services" class="nav-link">Services</a>
+                            <a href="#services" class="nav-link">
+                                <i class="fas fa-tshirt"></i>
+                                <span>Services</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#why-choose-us" class="nav-link">Why Choose Us</a>
+                            <a href="#gallery" class="nav-link">
+                                <i class="fas fa-images"></i>
+                                <span>Gallery</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#gallery" class="nav-link">Gallery</a>
+                            <a href="#contact" class="nav-link">
+                                <i class="fas fa-phone"></i>
+                                <span>Contact</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#reviews" class="nav-link">Reviews</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#faq" class="nav-link">FAQ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#contact" class="nav-link">Contact</a>
+                            <a href="#faq" class="nav-link">
+                                <i class="fas fa-question-circle"></i>
+                                <span>FAQ</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
-                <div class="nav-toggle" id="nav-toggle">
+                <div class="nav-toggle" id="nav-toggle" aria-label="Open menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </div>
+                <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <!-- Parallax Background Layers -->
+        <div class="parallax-container">
+            <div class="parallax-layer layer-1" data-speed="0.5"></div>
+            <div class="parallax-layer layer-2" data-speed="0.3"></div>
+            <div class="parallax-layer layer-3" data-speed="0.1"></div>
+        </div>
+        
         <div class="hero-container">
             <div class="hero-content" data-aos="fade-right">
           
@@ -238,6 +258,19 @@
                         exquisite vastra for god idols, with particular expertise in Shree Krishna and Radha Rani dresses. 
                         Every piece we create is imbued with spiritual intention and meticulous attention to detail.
                     </p>
+                    
+                    <!-- Work Flow Image -->
+                    <div class="work-flow-section" data-aos="fade-up">
+                        <h4>Our Sacred Craft Process</h4>
+                        <div class="work-flow-image">
+                            <img src="images/comic_image.png" alt="Mahajan Vastra Work Flow - Sacred Crafting Process" class="work-flow-img" loading="lazy">
+                        </div>
+                        <p class="work-flow-description">
+                            Each vastra is created with devotion, following traditional methods passed down through generations. 
+                            From fabric selection to final stitching, every step honors the divine purpose of the garment.
+                        </p>
+                    </div>
+                    
                     <div class="about-highlights">
                         <div class="highlight-item">
                             <i class="fas fa-om"></i>
@@ -278,7 +311,7 @@
             <div class="services-grid">
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-icon">
-                        <i class="fa fa-leaf" aria-hidden="true"></i>
+                        <i class="fas fa-tshirt" aria-hidden="true"></i>
                     </div>
                     <h3>Shree Krishna Vastra</h3>
                     <p>
@@ -293,7 +326,7 @@
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-icon">
-                        <i class="fa fa-tree" aria-hidden="true"></i>
+                        <i class="fas fa-user-tie" aria-hidden="true"></i>
                     </div>
                     <h3>Radha Rani Dresses</h3>
                     <p>
@@ -308,7 +341,7 @@
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-icon">
-                        <i class="fas fa-hands-praying"></i>
+                        <i class="fas fa-cut" aria-hidden="true"></i>
                     </div>
                     <h3>Custom Vastra Design</h3>
                     <p>
@@ -337,6 +370,20 @@
                 <p class="section-subtitle">Our commitment to your satisfaction and seva</p>
             </div>
             <div class="why-choose-grid">
+
+                <div class="why-choose-card why-choose-important" data-aos="fade-up" data-aos-delay="200">
+                    <div class="why-choose-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Important</span>
+                    </div>
+                    <p class="why-choose-text-en">
+                        Part of our earnings goes to social and religious causes, like langar, temple services, and temple development.
+                    </p>
+                    <p class="why-choose-text-hi">
+                        हमारी कमाई का एक हिस्सा सामाजिक और धार्मिक कार्यों में जाता है, जैसे लंगर, मंदिर सेवा और मंदिर विकास।
+                    </p>
+                </div>
+            
                 <div class="why-choose-card" data-aos="fade-up" data-aos-delay="100">
                     <p class="why-choose-text-en">
                         For us, your satisfaction is more important than profit. We work with honesty and care.
@@ -361,18 +408,7 @@
                         हम आपकी पसंद को समझते हैं और सबसे सही दाम पर सामान दिलाकर आपका पैसा बचाते हैं।
                     </p>
                 </div>
-                <div class="why-choose-card why-choose-important" data-aos="fade-up" data-aos-delay="400">
-                    <div class="why-choose-badge">
-                        <i class="fas fa-star"></i>
-                        <span>Important</span>
-                    </div>
-                    <p class="why-choose-text-en">
-                        Part of our earnings goes to social and religious causes, like langar, temple services, and temple development.
-                    </p>
-                    <p class="why-choose-text-hi">
-                        हमारी कमाई का एक हिस्सा सामाजिक और धार्मिक कार्यों में जाता है, जैसे लंगर, मंदिर सेवा और मंदिर विकास।
-                    </p>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -639,6 +675,13 @@
                             <a href="tel:+919888823840" class="contact-link">
                                 <i class="fas fa-phone"></i> Call Now
                             </a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Additional Contact</h4>
+                            <p><a href="tel:+9797882921" class="contact-link">Call: 9797882921</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
