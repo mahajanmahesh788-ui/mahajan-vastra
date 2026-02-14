@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mahajanmahesh788-ui.github.io/mahajan-vastra/sitemap.xml
