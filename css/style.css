@@ -2106,13 +2106,13 @@ text-align: center;
     background: linear-gradient(45deg, #E55A2B, #E67E22) !important;
 }
 
-/* ===== BACK TO TOP BUTTON ===== */
+/* ===== FLOATING BUTTONS: Back to top (lowest), WhatsApp (above it) ===== */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
+    bottom: 24px;
+    right: 24px;
+    width: 46px;
+    height: 46px;
     background: var(--gradient-primary);
     color: var(--white);
     border: none;
@@ -2125,24 +2125,6 @@ text-align: center;
     z-index: 999;
 }
 
-@media (max-width: 768px) {
-    .back-to-top {
-        right: max(14px, env(safe-area-inset-right, 14px));
-        bottom: max(16px, env(safe-area-inset-bottom, 16px));
-        width: 48px;
-        height: 48px;
-    }
-}
-
-@media (max-width: 768px) {
-    .back-to-top {
-        right: max(14px, env(safe-area-inset-right, 14px));
-        bottom: max(16px, env(safe-area-inset-bottom, 16px));
-        width: 48px;
-        height: 48px;
-    }
-}
-
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
@@ -2153,9 +2135,63 @@ text-align: center;
     box-shadow: var(--shadow-lg);
 }
 
-/* ===== STICKY WHATSAPP (MOBILE ONLY) ===== */
+/* ===== WHATSAPP FLOAT (visible on all devices, above Back to top) ===== */
 .whatsapp-float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 86px;   /* above Back to top: 24 + 50 + 12 gap */
+    right: 24px;
+    width: 46px;
+    height: 46px;
+    padding: 0 8px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.5);
+    z-index: 998;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+.whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    color: #fff;
+}
+.whatsapp-float i {
+    font-size: 1.25rem;
+}
+.whatsapp-float-text {
     display: none;
+}
+
+/* ===== RATE US FLOAT (above WhatsApp) ===== */
+.rate-us-float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 144px;   /* above WhatsApp: 86 + 46 + 12 gap */
+    right: 24px;
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+    z-index: 998;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+.rate-us-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+    color: #fff;
+}
+.rate-us-float i {
+    font-size: 1.5rem;
 }
 
 /* ===== IMAGE MODAL (GALLERY POPUP) ===== */

@@ -320,11 +320,11 @@
         justify-content: center;
     }
     
-    /* Back to Top Mobile - inside viewport */
+    /* Back to Top Mobile - lowest button, closer to bottom */
     .back-to-top {
-        width: 45px;
-        height: 45px;
-        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        width: 44px;
+        height: 44px;
+        bottom: max(20px, calc(20px + env(safe-area-inset-bottom, 0px)));
         right: max(14px, env(safe-area-inset-right, 14px));
     }
 }
@@ -573,6 +573,8 @@
     .header,
     .scroll-indicator,
     .back-to-top,
+    .whatsapp-float,
+    .rate-us-float,
     .hero-features,
     .contact-actions,
     .footer-social {
@@ -602,35 +604,33 @@
 }
 
 @media (max-width: 768px) {
-    /* Sticky WhatsApp button - mobile only, inside viewport */
+    /* WhatsApp mobile - above Back to top (20 + 45 + 12) */
     .whatsapp-float {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        position: fixed;
-        bottom: max(72px, calc(72px + env(safe-area-inset-bottom, 0px)));
+        bottom: max(76px, calc(76px + env(safe-area-inset-bottom, 0px)));
         right: max(14px, env(safe-area-inset-right, 14px));
-        width: 52px;
-        height: 52px;
-        background: #25D366;
-        color: #fff;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0;
         border-radius: 50%;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.5);
-        z-index: 998;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        text-decoration: none;
-    }
-    .whatsapp-float:hover {
-        transform: scale(1.08);
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-        color: #fff;
     }
     .whatsapp-float i {
-        font-size: 1.6rem;
+        font-size: 1.65rem;
     }
     .whatsapp-float-text {
         display: none;
+    }
+    
+    /* Rate us mobile - above WhatsApp (76 + 44 + 12) */
+    .rate-us-float {
+        bottom: max(132px, calc(132px + env(safe-area-inset-bottom, 0px)));
+        right: max(14px, env(safe-area-inset-right, 14px));
+        width: 44px;
+        height: 44px;
+    }
+    .rate-us-float i {
+        font-size: 1.65rem;
     }
     
     /* Mobile gallery improvements */
