@@ -66,6 +66,8 @@ html {
     font-size: 16px;
     overflow-x: hidden;
     max-width: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
@@ -75,6 +77,8 @@ body {
     color: var(--text-dark);
     background: var(--bg-light);
     overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
     max-width: 100%;
     position: relative;
 }
@@ -451,6 +455,7 @@ ul {
 
 .nav-toggle.active .bar:nth-child(2) {
     opacity: 0;
+    transform: translateX(20px);
     transform: translateX(20px);
 }
 
@@ -1212,6 +1217,63 @@ ul {
     font-size: 0.9rem;
 }
 
+/* ===== HOW WE MAKE YOUR VASTRA - COMIC (SINGLE IMAGE) ===== */
+.process-comic {
+    padding: var(--spacing-xxl) 0;
+    background: var(--white);
+}
+
+.process-comic-single {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.process-comic-frame {
+    border: 3px solid var(--text-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-cream);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: var(--spacing-xl);
+}
+
+.process-comic-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+}
+
+.process-comic-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.process-comic-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+.process-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
 /* ===== REVIEWS SECTION ===== */
 .reviews {
     padding: var(--spacing-xxl) 0;
@@ -1766,6 +1828,62 @@ text-align: center;
     
     .work-flow-img {
         max-width: 90%;
+    }
+    
+    .work-flow-description {
+        max-width: 100%;
+        padding: 0 var(--spacing-md);
+    }
+}
+
+/* Work Flow Section */
+.work-flow-section {
+margin: var(--spacing-xl) 0;
+text-align: center;
+}
+
+.work-flow-section h4 {
+    color: var(--primary-saffron);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.work-flow-image {
+    margin: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.work-flow-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-fast);
+}
+
+.work-flow-img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.work-flow-description {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-medium);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .work-flow-section {
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .work-flow-img {
+        max-width: 90%;
         margin: 0 auto; /* Center horizontally */
         display: block; /* Ensure block for margin auto to work */
     }
@@ -2016,6 +2134,15 @@ text-align: center;
     }
 }
 
+@media (max-width: 768px) {
+    .back-to-top {
+        right: max(14px, env(safe-area-inset-right, 14px));
+        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        width: 48px;
+        height: 48px;
+    }
+}
+
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
@@ -2029,6 +2156,136 @@ text-align: center;
 /* ===== STICKY WHATSAPP (MOBILE ONLY) ===== */
 .whatsapp-float {
     display: none;
+}
+
+/* ===== IMAGE MODAL (GALLERY POPUP) ===== */
+.image-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.image-modal[aria-hidden="false"],
+.image-modal.is-open {
+    display: flex !important;
+}
+
+.image-modal .modal-content {
+    position: relative;
+    z-index: 1;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    width: 95vw;
+    max-width: 900px;
+    max-height: 95vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalFadeIn 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.image-modal .close-modal {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--white);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.2s ease;
+}
+
+.image-modal .close-modal:hover {
+    background: var(--primary-saffron);
+}
+
+.image-modal .modal-image-wrapper {
+    flex: 1;
+    min-height: 200px;
+    max-height: 65vh;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: #111;
+}
+
+.image-modal .modal-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.image-modal .modal-image-container img,
+.image-modal #modalImage {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+}
+
+.image-modal .modal-info {
+    position: relative;
+    z-index: 20;
+    flex-shrink: 0;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid #eee;
+    background: var(--white);
+}
+
+.image-modal .modal-info h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    color: var(--text-dark);
+}
+
+.image-modal .modal-direction-btn {
+    margin-top: 0.5rem;
+}
+
+.image-modal .modal-direction-btn.hide-direction {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .image-modal .modal-content {
+        width: 100%;
+        max-height: 92vh;
+    }
+    .image-modal .modal-image-wrapper {
+        max-height: 55vh;
+    }
+    .image-modal #modalImage {
+        max-height: 50vh;
+    }
 }
 
 /* ===== THANK YOU POPUP ===== */

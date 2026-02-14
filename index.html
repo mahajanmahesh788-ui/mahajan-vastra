@@ -413,6 +413,7 @@
         </div>
     </section>
 
+
 <!-- Photo Gallery Section -->
 <section class="gallery" id="gallery">
     <div class="gallery-header">
@@ -423,60 +424,60 @@
 
     <div class="gallery-scroll">
         <div class="gallery-row">
-            <div class="gallery-item">
+            <div class="gallery-item-horizontal">
                 <img src="images/aa2.webp" alt="Krishna Vastra" data-title="Laxmi Narayan Temple" data-link="https://share.google/3sq8VHw9UJkKfMgq3" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Laxmi Narayan Temple</h4>
                 </div>
             </div>
 
-              <div class="gallery-item">
+              <div class="gallery-item-horizontal">
                 <img src="images/aa4.webp" alt="Divine Idol Dress" data-title="Shri Dwarikapuri mandir" data-link="https://share.google/zKMORqE0L7xRuwyGk" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Shri Dwarikapuri mandir</h4>
                 </div>
             </div>
 
-              <div class="gallery-item">
+              <div class="gallery-item-horizontal">
                 <img src="images/aa8.webp" alt="Divine Idol Dress" data-title="Ramesh Puri Mandir" data-link="https://share.google/rVQy01ysW5pO2ZIFV" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Ramesh Puri Mandir</h4>
                 </div>
             </div>
 
-             <div class="gallery-item">
+             <div class="gallery-item-horizontal">
                 <img src="images/a5.webp" alt="Divine Idol Dress" data-title="Ramesh Puri Mandir" data-link="https://share.google/rVQy01ysW5pO2ZIFV" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Ramesh Puri Mandir</h4>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item-horizontal">
                 <img src="images/aaa7.webp" alt="Divine Idol Dress" data-title="Nav Durga Mata Temple" data-link="https://share.google/8eGBMCVnmwMgduhaF" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Nav Durga Mata Temple</h4>
                 </div>
             </div>
-               <div class="gallery-item">
+               <div class="gallery-item-horizontal">
                 <img src="images/aa6.webp" alt="Divine Idol Dress" data-title="Laxmi Narayan Temple" data-link="https://share.google/3sq8VHw9UJkKfMgq3" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Laxmi Narayan Temple</h4>
                 </div>
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item-horizontal">
                 <img src="images/a7.webp" alt="Radha Rani Dress" data-title="Laxmi Narayan Temple" data-link="https://share.google/3sq8VHw9UJkKfMgq3" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Laxmi Narayan Temple</h4>
                 </div>
             </div>
-             <div class="gallery-item">
+             <div class="gallery-item-horizontal">
                 <img src="images/aa3.webp" alt="Divine Idol Dress" data-title="Panchmukhi Shiv Temple" data-link="https://share.google/Dg9AC6FHtEy77f14X" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Panchmukhi Shiv Temple</h4>
                 </div>
             </div>
 
-               <div class="gallery-item">
+               <div class="gallery-item-horizontal">
                 <img src="images/aa1.webp" alt="Temple Idol Vastra" data-title="Laxmi Narayan Temple" data-link="https://share.google/3sq8VHw9UJkKfMgq3" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Laxmi Narayan Temple</h4>
@@ -486,14 +487,14 @@
 
         <div class="gallery-row">
 
-          <div class="gallery-item">
+          <div class="gallery-item-horizontal">
                 <img src="images/handmade-poshak.jpg" alt="Krishna Vastra" data-title="Laxmi Narayan Temple" data-link="https://share.google/3sq8VHw9UJkKfMgq3" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Laxmi Narayan Temple</h4>
                 </div>
             </div>
 
-          <div class="gallery-item">
+          <div class="gallery-item-horizontal">
                 <img src="images/a3.webp" alt="Temple Idol Vastra" data-title="Ladu Gopal" data-link="" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Ladu Gopal</h4>
@@ -528,7 +529,7 @@
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <div class="gallery-item-horizontal">
                 <img src="images/saraswati.webp" alt="Divine Idol Dress" data-title="Saraswati Mata Mandir" data-link="https://share.google/g4ejY2O6VToBAh89M" onclick="openImageModal(this)" style="cursor: pointer;">
                 <div class="gallery-overlay">
                     <h4>Saraswati Mata Mandir</h4>
@@ -787,8 +788,7 @@
                 <img id="modalImage" src="" alt="Gallery Image">
             </div>
             <div class="modal-info">
-                <h3 id="modalTitle">Image Title</h3>
-                <p id="modalDescription">Image description</p>
+                <h3 id="modalTitle"></h3>
                 <a id="modalDirection" href="#" target="_blank" class="btn btn-primary">
                     <i class="fas fa-map-marker-alt"></i> <span id="modalDirectionText">View location</span>
                 </a>
@@ -852,12 +852,11 @@
             document.getElementById('modalImage').src = imgElement.src;
             document.getElementById('modalImage').alt = imgElement.alt;
             document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDescription').textContent = `Beautiful vastra from ${title}`;
             
-            // Set directions button link and label
+            // Set directions button: use selected image data-link
             const directionBtn = document.getElementById('modalDirection');
             const directionText = document.getElementById('modalDirectionText');
-            if (link && link !== '#') {
+            if (link && link !== '' && link !== '#') {
                 directionBtn.href = link;
                 directionBtn.style.display = 'inline-flex';
                 if (directionText) {
@@ -1059,6 +1058,24 @@
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-float-text">Chat</span>
     </a>
+
+    <!-- Gallery image popup: big image, title, direction -->
+    <div id="imageModal" class="image-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalCaption">
+        <div class="modal-content">
+            <button type="button" class="close-modal" aria-label="Close">&times;</button>
+            <div class="modal-image-wrapper">
+                <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="">
+                </div>
+            </div>
+            <div class="modal-info">
+                <h3 id="modalCaption"></h3>
+                <a id="modalDirection" href="#" target="_blank" rel="noopener" class="btn btn-primary modal-direction-btn hide-direction">
+                    <i class="fas fa-map-marker-alt"></i> <span id="modalDirectionText">View location</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

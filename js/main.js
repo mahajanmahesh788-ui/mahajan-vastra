@@ -265,83 +265,75 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Gallery functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Gallery image click handlers
-    function setupGalleryClicks() {
-        document.querySelectorAll('.gallery-item img, .gallery-item-horizontal img').forEach(img => {
-            img.style.cursor = 'pointer';
-            img.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                openImageModal(this);
-            });
-        });
-        
-        // Also try broader selector
-        document.querySelectorAll('img[data-title]').forEach(img => {
-            img.style.cursor = 'pointer';
-            img.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                openImageModal(this);
-            });
-        });
-    }
-    
-    // Setup clicks immediately
-    setupGalleryClicks();
-    
-    // Also setup after a delay to ensure all images are loaded
-    setTimeout(setupGalleryClicks, 500);
-});
-
-// Image modal functionality
+// Gallery: click opens popup with selected image data (title, image, data-link for direction)
 function openImageModal(img) {
-    const modal = document.getElementById('imageModal');
+    if (!img || !img.src) return;
+    var modal = document.getElementById('imageModal');
     if (!modal) return;
-    
-    const modalImg = document.getElementById('modalImage');
-    const caption = document.getElementById('modalCaption');
-    
-    modal.style.display = 'block';
+    var link = (img.getAttribute && img.getAttribute('data-link')) || '';
+    var title = (img.getAttribute && img.getAttribute('data-title')) || img.alt || '';
+    var modalImg = document.getElementById('modalImage');
+    var modalTitle = document.getElementById('modalTitle');
+    var directionLink = document.getElementById('modalDirection');
+    var directionText = document.getElementById('modalDirectionText');
+    if (modalImg) {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || title;
+    }
+    if (modalTitle) modalTitle.textContent = title;
+    if (directionLink) {
+        directionLink.href = link && link !== '' ? link : '#';
+        if (link && link !== '') {
+            directionLink.classList.remove('hide-direction');
+            if (directionText) directionText.textContent = (link.indexOf('maps') !== -1 || link.indexOf('google') !== -1) ? 'Get Directions' : 'View location';
+        } else {
+            directionLink.classList.add('hide-direction');
+        }
+    }
+    modal.style.display = 'flex';
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    
-    if (modalImg) modalImg.src = img.src;
-    if (caption) caption.textContent = img.alt || img.getAttribute('data-title') || '';
 }
 
-// Close modal functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('imageModal');
-    const closeBtn = document.querySelector('.close-modal');
-    
-    if (modal) {
-        // Close on X button click
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
+    var modal = document.getElementById('imageModal');
+    var gallery = document.querySelector('[data-gallery], #gallery, .gallery');
+    function closeImageModal() {
+        if (modal) {
+            modal.style.display = 'none';
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
         }
-        
-        // Close on backdrop click
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Close with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+    }
+    if (gallery) {
+        gallery.addEventListener('click', function(e) {
+            var item = e.target.closest('.gallery-item, .gallery-item-horizontal');
+            if (!item) return;
+            var img = item.querySelector('img');
+            if (img) {
+                e.preventDefault();
+                e.stopPropagation();
+                openImageModal(img);
             }
         });
     }
+    document.querySelectorAll('.gallery-item img, .gallery-item-horizontal img').forEach(function(img) {
+        img.style.cursor = 'pointer';
+    });
+    if (modal) {
+        var closeBtn = modal.querySelector('.close-modal');
+        if (closeBtn) closeBtn.addEventListener('click', closeImageModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeImageModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') closeImageModal();
+        });
+    }
 });
+window.openImageModal = openImageModal;
 
 // JustDial link handling (placeholder - replace with actual JustDial URL)
 const justDialLink = document.getElementById('justDialLink');
