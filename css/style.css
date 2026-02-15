@@ -632,7 +632,7 @@ ul {
 
 /* ===== HERO SECTION ===== */
 .hero {
-    padding: 120px 0 80px;
+    padding: 140px 0 80px;
     background: var(--gradient-secondary);
     position: relative;
     overflow: hidden;
@@ -743,6 +743,7 @@ ul {
 .hero-buttons {
     display: flex;
     gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
 }
 

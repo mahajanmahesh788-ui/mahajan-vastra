@@ -1,5 +1,12 @@
 /* ===== MOBILE RESPONSIVE STYLES ===== */
 
+/* Desktop: Nav logo h1 in one line (hide mobile br) */
+@media (min-width: 769px) {
+    .nav-logo h1 br.br-mobile-only {
+        display: none;
+    }
+}
+
 /* Tablet Styles (max-width: 1024px) */
 @media (max-width: 1024px) {
     .container {
@@ -8,6 +15,10 @@
     
     .nav-container {
         padding: 0 var(--spacing-sm);
+    }
+    
+    .hero {
+        padding: 110px 0 70px;
     }
     
     .hero-container {
@@ -131,7 +142,7 @@
     
     /* Hero Section Mobile */
     .hero {
-        padding: 100px 0 60px;
+        padding: 95px 0 60px;
     }
     
     .hero-container {
@@ -359,7 +370,7 @@
     
     /* Hero Section Small Mobile */
     .hero {
-        padding: 90px 0 50px;
+        padding: 92px 0 50px;
     }
     
     .hero-title {
