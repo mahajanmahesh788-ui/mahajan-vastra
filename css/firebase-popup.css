@@ -1,0 +1,131 @@
+/* ===== FESTIVAL POPUP (Firebase Firestore Controlled) ===== */
+
+.festival-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.festival-popup.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.festival-popup-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.festival-popup-content {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.festival-popup.is-visible .festival-popup-content {
+    transform: scale(1) translateY(0);
+}
+
+.festival-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.25rem;
+    z-index: 10;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.festival-popup-close:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: scale(1.05);
+}
+
+.festival-popup-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    display: block;
+}
+
+.festival-popup-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2C1810;
+    margin: 1.25rem 1.5rem 0.5rem;
+    font-family: 'Noto Serif', serif;
+    text-align: center;
+}
+
+.festival-popup-description {
+    font-size: 1rem;
+    color: #5D4037;
+    line-height: 1.6;
+    margin: 0 1.5rem 1.5rem;
+}
+
+.festival-popup-no-image .festival-popup-title {
+    margin-top: 2.5rem;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .festival-popup {
+        padding: 0.75rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .festival-popup-content {
+        max-height: 85vh;
+    }
+
+    .festival-popup-image {
+        height: 180px;
+    }
+
+    .festival-popup-title {
+        font-size: 1.25rem;
+        margin: 1rem 1.25rem 0.5rem;
+    }
+
+    .festival-popup-description {
+        font-size: 0.95rem;
+        margin: 0 1.25rem 1.25rem;
+    }
+
+    .festival-popup-close {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+}

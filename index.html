@@ -74,6 +74,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/firebase-popup.css">
     
     <!-- Structured Data - Local Business -->
     <script type="application/ld+json">
@@ -149,6 +150,19 @@
     </script>
 </head>
 <body>
+    <!-- Festival Popup (Firebase Firestore controlled) -->
+    <div id="festivalPopup" class="festival-popup" aria-hidden="true">
+        <div class="festival-popup-overlay"></div>
+        <div class="festival-popup-content">
+            <button type="button" class="festival-popup-close" id="festivalPopupClose" aria-label="Close popup">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" class="festival-popup-image" id="festivalPopupImage">
+            <h2 class="festival-popup-title" id="festivalPopupTitle"></h2>
+            <p class="festival-popup-description" id="festivalPopupDescription"></p>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header" id="header">
         <nav class="navbar">
@@ -1120,10 +1134,13 @@
     </div>
 
     <!-- AOS Animation Script -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
+    <script src="js/firebase-popup.js"></script>
     
     <!-- Initialize AOS -->
     <script>
