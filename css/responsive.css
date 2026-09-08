@@ -2,7 +2,8 @@
 
 /* Desktop: Nav logo h1 in one line (hide mobile br) */
 @media (min-width: 769px) {
-    .nav-logo h1 br.br-mobile-only {
+    .nav-logo h1 br.br-mobile-only,
+    .nav-logo .logo-text br.br-mobile-only {
         display: none;
     }
 }

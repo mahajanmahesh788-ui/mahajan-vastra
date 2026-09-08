@@ -191,7 +191,8 @@ ul {
     position: relative;
 }
 
-.nav-logo h1 {
+.nav-logo h1,
+.nav-logo .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--white);
@@ -206,7 +207,8 @@ ul {
     white-space: pre-wrap;
 }
 
-.nav-logo h1:hover {
+.nav-logo h1:hover,
+.nav-logo .logo-text:hover {
     transform: translateY(-2px);
     text-shadow: 0 4px 8px rgba(255, 153, 51, 0.3);
 }
@@ -480,7 +482,8 @@ ul {
         overflow: hidden;
         padding-right: 58px;
     }
-    .nav-logo h1 {
+    .nav-logo h1,
+    .nav-logo .logo-text {
         font-size: 1.05rem;
         padding: 0.35rem 0.4rem;
         white-space: pre-wrap;
