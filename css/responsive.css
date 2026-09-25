@@ -1,10 +1,9 @@
 /* ===== MOBILE RESPONSIVE STYLES ===== */
 
-/* Desktop: Nav logo h1 in one line (hide mobile br) */
+/* Nav logo adjustments */
 @media (min-width: 769px) {
-    .nav-logo h1 br.br-mobile-only,
-    .nav-logo .logo-text br.br-mobile-only {
-        display: none;
+    .nav-logo .logo-title {
+        white-space: nowrap;
     }
 }
 
@@ -188,11 +187,16 @@
     }
     
     .hero-image {
-        order: -1;
+        order: 0;
+        margin-top: var(--spacing-sm);
     }
     
-    .image-container img {
-        height: 300px;
+    .hero-image-card {
+        max-width: 320px;
+    }
+
+    .header-image {
+        max-height: 420px;
     }
     
     /* About Section Mobile */
@@ -387,8 +391,12 @@
         padding: var(--spacing-xs) var(--spacing-md);
     }
     
-    .image-container img {
-        height: 250px;
+    .hero-image-card {
+        max-width: 280px;
+    }
+    
+    .header-image {
+        max-height: 360px;
     }
     
     .overlay-text {

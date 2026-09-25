@@ -45,39 +45,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // Active link highlighting
     const sections = document.querySelectorAll('section[id]');
     
-    window.addEventListener('scroll', function() {
-        let current = '';
+    function updateActiveNavLink() {
+        let current = 'home';
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop - 100) {
+            const sectionTop = section.offsetTop - 130;
+            const sectionHeight = section.offsetHeight;
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 current = section.getAttribute('id');
             }
         });
+
+        // If at or near bottom of page, highlight the last section (e.g. contact or faq)
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 60) {
+            const lastSection = sections[sections.length - 1];
+            if (lastSection) current = lastSection.getAttribute('id');
+        }
         
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
+            const href = link.getAttribute('href');
+            if (href === '#' + current || (current === 'home' && (href === '#home' || href === '#'))) {
                 link.classList.add('active');
             }
         });
+    }
+    
+    window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+    window.addEventListener('load', updateActiveNavLink);
+    window.addEventListener('hashchange', updateActiveNavLink);
+    updateActiveNavLink();
+    
+    // When clicking a nav link, immediately highlight it
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
     
-    // Header always visible (no hide on scroll). On desktop, lighten background on scroll; on mobile keep gradient so hamburger stays visible.
+    // Header shadow on scroll
     window.addEventListener('scroll', function() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (window.innerWidth > 768) {
-            if (scrollTop > 50) {
-                header.style.background = 'rgba(255, 253, 247, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.background = 'rgba(255, 253, 247, 0.95)';
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            }
-        } else {
-            header.style.boxShadow = scrollTop > 50 ? '0 2px 20px rgba(0,0,0,0.1)' : '0 2px 10px rgba(0,0,0,0.1)';
-        }
-    });
+        header.style.boxShadow = scrollTop > 30 ? '0 4px 20px rgba(0, 0, 0, 0.18)' : '0 2px 10px rgba(255, 153, 51, 0.2)';
+    }, { passive: true });
     
     // Back to top button
     const backToTopBtn = document.getElementById('backToTop');
