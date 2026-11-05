@@ -35,8 +35,7 @@
         gap: var(--spacing-xl);
     }
     
-    .services-grid,
-    .reviews-grid {
+    .services-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: var(--spacing-lg);
     }
@@ -174,18 +173,6 @@
         justify-content: center;
     }
     
-    .hero-features {
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .feature-item {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-    }
-    
     .hero-image {
         order: 0;
         margin-top: var(--spacing-sm);
@@ -196,13 +183,29 @@
     }
 
     .header-image {
-        max-height: 420px;
+        max-height: 360px;
+    }
+
+    .hero-artisan-caption {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.75rem 0.7rem;
+    }
+
+    .hero-artisan-caption strong {
+        font-size: 0.92rem;
     }
     
     /* About Section Mobile */
     .about-content {
-        grid-template-columns: 1fr;
         gap: var(--spacing-xl);
+    }
+
+    .about-intro {
+        grid-template-columns: 1fr;
+    }
+
+    .about-highlights {
+        display: none;
     }
     
     .about-text h3 {
@@ -245,6 +248,36 @@
     .services-cta .btn {
         max-width: 280px;
     }
+
+    .pricing-materials {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        max-width: none;
+        gap: 0.4rem;
+        padding: 0.1rem 0 0.45rem;
+        scroll-snap-type: x proximity;
+    }
+
+    .pricing-material {
+        width: 78px;
+        flex: 0 0 78px;
+    }
+
+    .pricing-material figcaption {
+        font-size: 0.62rem;
+        padding: 0.28rem 0.15rem;
+    }
+
+    .pricing-from {
+        font-size: 1.35rem;
+    }
+
+    .pricing-cta-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
     
     /* Why Choose Us Section Mobile */
     .why-choose-grid {
@@ -275,35 +308,241 @@
         right: 15px;
     }
     
-    /* Reviews Section Mobile */
+    /* Reviews Section Mobile — horizontal swipe */
     .reviews-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
+        gap: 0.65rem;
+        margin-left: -0.25rem;
+        margin-right: -0.25rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
     }
     
     .review-card {
-        padding: var(--spacing-lg);
+        flex: 0 0 min(270px, 78vw);
+        width: min(270px, 78vw);
+        padding: 0.85rem;
+    }
+
+    .review-card-cta .btn {
+        width: 100%;
+        justify-content: center;
     }
     
-    /* Contact Section Mobile */
+    /* Tighter section tops on mobile */
+    .why-choose-us,
+    .reviews {
+        padding-top: 1.5rem;
+        padding-bottom: 1.75rem;
+    }
+
+    .why-choose-us .section-header,
+    .reviews .section-header {
+        margin-bottom: 0.85rem;
+    }
+
+    .why-choose-us .section-title,
+    .reviews .section-title {
+        font-size: 1.55rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .why-choose-us .section-subtitle,
+    .reviews .section-subtitle {
+        font-size: 0.9rem;
+        margin-top: 0.7rem;
+    }
+
+    .google-proof {
+        margin-top: 0;
+        margin-bottom: 0.85rem;
+        padding: 0.75rem 0.9rem;
+        gap: 0.55rem;
+    }
+
+    /* Contact Section Mobile — compact, less scroll */
+    .contact {
+        padding: 1.35rem 0 1.75rem;
+    }
+
+    .contact .section-header {
+        margin-bottom: 0.85rem;
+    }
+
+    .contact .section-title {
+        font-size: 1.55rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .contact .section-subtitle {
+        font-size: 0.9rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0;
+    }
+
     .contact-content {
         grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        gap: 0.85rem;
     }
     
     .contact-info h3 {
-        font-size: 1.8rem;
-        text-align: center;
+        font-size: 1.15rem;
+        text-align: left;
+        margin-bottom: 0.65rem;
+    }
+
+    .contact-item {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        gap: 0.65rem;
+        margin-bottom: 0.55rem;
+        padding: 0.65rem 0.75rem;
+    }
+
+    .contact-item i {
+        margin: 0;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    .contact-item h4 {
+        font-size: 0.92rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .contact-item p {
+        font-size: 0.85rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.35;
+    }
+
+    .directions-link,
+    .contact-link {
+        font-size: 0.82rem;
+        margin-top: 0.15rem;
+    }
+
+    .contact-item:has(.contact-map-embed) {
+        flex-wrap: wrap;
+    }
+
+    .contact-location-wrap {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .contact-map-embed {
+        display: block;
+        margin-top: 0.55rem;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .contact-map-embed iframe {
+        height: 160px;
     }
     
     .contact-actions {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: stretch;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
     }
     
     .contact-actions .btn {
+        flex: 1 1 calc(50% - 0.25rem);
+        max-width: none;
+        width: auto;
+        justify-content: center;
+        padding: 0.65rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .contact-form {
+        padding: 0.9rem;
+    }
+
+    .measure-guide {
+        padding: 0.9rem;
+    }
+
+    .measure-guide h3 {
+        font-size: 1.1rem;
+    }
+
+    .measure-guide-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .measure-guide-visual {
+        max-width: 220px;
+        margin: 0 auto;
+    }
+
+    .measure-checklist li {
+        font-size: 0.88rem;
+        padding: 0.45rem 0.55rem;
+    }
+
+    .measure-guide .measure-wa-btn {
+        width: auto;
+        min-width: min(280px, 100%);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .google-proof {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .google-proof-rating {
+        font-size: 2rem;
+    }
+
+    .google-proof-actions {
         width: 100%;
-        max-width: 280px;
+    }
+
+    .google-proof-actions .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        font-size: 0.88rem;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .contact-form .form-group {
+        margin-bottom: 0.65rem;
+    }
+
+    .contact-form .form-group label {
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .contact-form .form-group input,
+    .contact-form .form-group select,
+    .contact-form .form-group textarea {
+        padding: 0.55rem 0.7rem;
+        font-size: 0.95rem;
+    }
+
+    .contact-form .form-group textarea {
+        min-height: 64px;
+    }
+
+    .contact-form .btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding: 0.7rem 1rem;
+    }
+
+    .form-alt-contact {
+        display: none;
     }
     
     /* FAQ Section Mobile */
@@ -315,25 +554,119 @@
         font-size: 0.9rem;
     }
     
-    /* Footer Mobile */
+    /* Footer Mobile — compact, horizontal links */
+    .footer {
+        padding: 1.5rem 0 1rem;
+    }
+
     .footer-content {
         grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        gap: 1rem;
         text-align: center;
+        margin-bottom: 1rem;
     }
     
     .footer-section {
-        margin-bottom: var(--spacing-lg);
+        margin-bottom: 0;
+    }
+
+    .footer-logo h3 {
+        font-size: 1.05rem;
+        line-height: 1.3;
+        margin-bottom: 0.35rem;
+    }
+
+    .footer-logo p {
+        font-size: 0.82rem;
+        margin-bottom: 0.55rem;
+        line-height: 1.35;
+    }
+
+    .footer-section h4 {
+        font-size: 0.95rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .footer-links-inline {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.35rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links-inline li {
+        margin: 0;
+    }
+
+    .footer-links-inline a {
+        display: inline-block;
+        padding: 0.28rem 0.55rem;
+        font-size: 0.75rem;
+        line-height: 1.2;
+        color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        white-space: nowrap;
+    }
+
+    .footer-links-inline a:hover {
+        color: var(--primary-gold);
+        padding-left: 0.55rem;
+        background: rgba(255, 215, 0, 0.12);
+    }
+
+    .contact-details p {
+        font-size: 0.82rem;
+        margin-bottom: 0.35rem;
+        justify-content: center;
+        gap: 0.4rem;
+        line-height: 1.3;
     }
     
+    .footer-bottom {
+        padding-top: 0.75rem;
+    }
+
     .footer-bottom-content {
         flex-direction: column;
         text-align: center;
-        gap: var(--spacing-md);
+        gap: 0.5rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .footer-badges {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+
+    .footer-legal {
+        padding-top: 0.45rem;
+    }
+
+    .footer-legal p {
+        font-size: 0.75rem;
+        line-height: 1.35;
+    }
+
+    .footer-credit {
+        margin-top: 0.55rem;
+        padding-top: 0.55rem;
+        font-size: 0.8rem;
     }
     
     .footer-social {
         justify-content: center;
+        gap: 0.45rem;
+    }
+
+    .footer-social .social-link {
+        width: 36px;
+        height: 36px;
     }
     
     /* Back to Top Mobile - lowest button, closer to bottom */
@@ -435,21 +768,11 @@
     
     /* Contact Section Small Mobile */
     .contact-info h3 {
-        font-size: 1.6rem;
+        font-size: 1.1rem;
     }
-    
-    .contact-item {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--spacing-sm);
-    }
-    
-    .contact-item i {
-        margin: 0 auto;
-    }
-    
+
     .contact-form {
-        padding: var(--spacing-lg);
+        padding: 0.8rem;
     }
     
     /* FAQ Section Small Mobile */
@@ -467,24 +790,25 @@
     
     /* Footer Small Mobile */
     .footer-logo h3 {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
     
     .footer-section h4 {
-        font-size: 1.1rem;
-    }
-    
-    .footer-links a {
         font-size: 0.9rem;
     }
     
+    .footer-links-inline a {
+        font-size: 0.7rem;
+        padding: 0.24rem 0.45rem;
+    }
+    
     .footer-bottom p {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     
     .badge {
-        font-size: 0.7rem;
-        padding: 3px var(--spacing-xs);
+        font-size: 0.65rem;
+        padding: 2px 0.4rem;
     }
 }
 
@@ -500,26 +824,11 @@
         max-width: none;
     }
     
-    .hero-features {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .feature-item {
-        width: auto;
-        max-width: none;
-    }
-    
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
     .why-choose-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .reviews-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
@@ -541,10 +850,6 @@
     }
     
     .why-choose-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .reviews-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
@@ -581,11 +886,6 @@
         grid-template-columns: repeat(4, 1fr);
         gap: var(--spacing-xl);
     }
-    
-    .reviews-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--spacing-xxl);
-    }
 }
 
 /* Print Styles */
@@ -595,7 +895,6 @@
     .back-to-top,
     .whatsapp-float,
     .rate-us-float,
-    .hero-features,
     .contact-actions,
     .footer-social {
         display: none !important;

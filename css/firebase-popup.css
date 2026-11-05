@@ -67,12 +67,54 @@
     transform: scale(1.05);
 }
 
+.festival-popup-image-wrap {
+    position: relative;
+    width: 100%;
+    container-type: inline-size;
+}
+
 .festival-popup-image {
     width: 100%;
     height: 220px;
     object-fit: cover;
+    object-position: center;
     border-radius: 16px 16px 0 0;
     display: block;
+}
+
+.festival-popup-default-image .festival-popup-image {
+    height: auto;
+    object-fit: contain;
+}
+
+.festival-popup-board-text {
+    position: absolute;
+    left: 29%;
+    top: 71%;
+    width: max-content;
+    max-width: 24%;
+    margin: 0;
+    padding: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #3d2412;
+    font-family: 'Kalam', 'Noto Sans Devanagari', serif;
+    font-weight: 700;
+    font-size: clamp(0.7rem, 4.2cqw, 1.15rem);
+    line-height: 1.15;
+    pointer-events: none;
+    word-break: break-word;
+}
+
+.festival-popup-board-text.is-long {
+    font-size: clamp(0.4rem, 2.8cqw, 0.75rem);
+}
+
+.festival-popup-board-text[hidden] {
+    display: none;
 }
 
 .festival-popup-title {
@@ -109,6 +151,10 @@
 
     .festival-popup-image {
         height: 180px;
+    }
+
+    .festival-popup-default-image .festival-popup-image {
+        height: auto;
     }
 
     .festival-popup-title {

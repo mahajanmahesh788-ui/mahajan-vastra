@@ -356,10 +356,10 @@ const justDialBusinessUrl = "https://www.justdial.com/Pathankot/Mahajan-God-Idol
 
 if (justDialLink) {
     justDialLink.href = justDialBusinessUrl;
-    justDialLink.addEventListener('click', function(e) {
-        // Track JustDial clicks
-        // You can add analytics tracking here
-    });
+}
+
+if (justDialSocial) {
+    justDialSocial.href = justDialBusinessUrl;
 }
 
 // Utility functions
