@@ -1132,43 +1132,118 @@ ul {
     background: var(--bg-cream);
 }
 
-.pricing-hero-card {
-    max-width: 820px;
+.pricing-estimate {
+    max-width: 920px;
     margin: 0 auto var(--spacing-lg);
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-lg);
     background: var(--white);
     border-radius: var(--radius-xl);
-    text-align: center;
     box-shadow: var(--shadow-md);
     border: 2px solid rgba(255, 153, 51, 0.25);
 }
 
-.pricing-from {
-    font-size: 1.65rem;
-    font-weight: 700;
+.pricing-estimate-title {
+    text-align: center;
+    font-size: 1.45rem;
     color: var(--text-dark);
-    margin-bottom: var(--spacing-xs);
-    font-family: var(--font-primary);
-}
-
-.pricing-from span {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.pricing-from-hi {
-    font-size: 1.15rem;
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     font-family: var(--font-devanagari);
+    line-height: 1.35;
 }
 
-.pricing-note {
+.pricing-estimate-title span {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 1.05rem;
+    font-family: var(--font-primary);
+    color: var(--primary-saffron);
+    font-weight: 600;
+}
+
+.pricing-estimate-lead {
+    text-align: center;
     color: var(--text-medium);
     line-height: 1.65;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 0.55rem;
+    font-size: 0.98rem;
+}
+
+.pricing-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    -webkit-overflow-scrolling: touch;
+}
+
+.pricing-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    background: var(--bg-cream);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.pricing-table th {
+    background: linear-gradient(135deg, var(--primary-saffron), #e67e22);
+    color: var(--white);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 0.85rem 0.9rem;
+    line-height: 1.35;
+}
+
+.pricing-table td {
+    padding: 0.9rem;
+    border-bottom: 1px solid rgba(255, 153, 51, 0.18);
+    color: var(--text-medium);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    vertical-align: top;
+}
+
+.pricing-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.pricing-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.pricing-table tbody tr:hover {
+    background: rgba(255, 215, 0, 0.18);
+}
+
+.pricing-table td strong {
+    color: var(--text-dark);
+}
+
+.pricing-size {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-size: 0.82rem;
+    color: var(--primary-saffron);
+    font-weight: 600;
+}
+
+.pricing-rate {
+    white-space: nowrap;
+    color: var(--text-dark) !important;
+    font-weight: 600;
+}
+
+.pricing-rate strong {
+    color: var(--primary-saffron);
+    font-size: 1.05rem;
+}
+
+.pricing-table-note {
+    margin: 0.45rem 0 0;
+    color: var(--text-medium);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    text-align: left;
 }
 
 .pricing-highlights {

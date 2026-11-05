@@ -269,8 +269,35 @@
         padding: 0.28rem 0.15rem;
     }
 
-    .pricing-from {
-        font-size: 1.35rem;
+    .pricing-estimate {
+        padding: 0.9rem;
+    }
+
+    .pricing-estimate-title {
+        font-size: 1.2rem;
+    }
+
+    .pricing-estimate-title span {
+        font-size: 0.95rem;
+    }
+
+    .pricing-estimate-lead {
+        font-size: 0.88rem;
+        text-align: left;
+    }
+
+    .pricing-table {
+        min-width: 520px;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+        padding: 0.7rem 0.65rem;
+        font-size: 0.82rem;
+    }
+
+    .pricing-table-note {
+        font-size: 0.8rem;
     }
 
     .pricing-cta-buttons .btn {

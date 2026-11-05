@@ -40,21 +40,21 @@ Create this structure in Firestore:
 
 | Collection | Document | Fields |
 |------------|----------|--------|
-| `popup` | `festival` | `showPopup`, `title`, `description`, `image` |
+| `popup` | `festival` | `showPopup`, `title`, `description`, `image`, `boardText` |
 
-### How to create
+### How to create / update
 
-1. Firestore → **Start collection**
-2. Collection ID: `popup`
-3. Document ID: `festival`
-4. Add fields:
+1. Firebase Console → **Firestore Database**
+2. Collection: `popup` → Document: `festival`
+3. Click **Add field** for any missing field (GitHub push will never create these for you)
 
-| Field       | Type    | Example Value |
-|-------------|---------|---------------|
-| `showPopup` | boolean | `true`        |
-| `title`     | string  | `🪔 Happy Diwali` |
-| `description` | string | `Wishing you and your family a blessed Diwali. Get special vastra for your deities this festival.` |
-| `image`     | string  | `https://example.com/diwali.jpg` |
+| Field         | Type    | Example Value | Notes |
+|---------------|---------|---------------|-------|
+| `showPopup`   | boolean | `true`        | `true` = show popup, `false` = hide |
+| `title`       | string  | `🪔 Happy Diwali` | Big heading under the image |
+| `description` | string  | `Wishing you...` | Short text under title |
+| `image`       | string  | `https://...jpg` | Festival image URL. Leave **empty** to use default board image |
+| `boardText`   | string  | `शुभ नवरात्रि` | Text drawn on the blank board when `image` is empty/broken. Keep short |
 
 ## 5. Example Data
 
