@@ -217,16 +217,10 @@
         text-align: center;
     }
     
-    .about-image img {
+    .about-image > img {
         height: 300px;
         max-width: 400px;
         margin: 0 auto;
-    }
-    
-    .about-badge {
-        position: static;
-        margin: var(--spacing-md) auto 0;
-        display: inline-block;
     }
     
     /* Services Section Mobile */
@@ -768,7 +762,7 @@
         font-size: 1.6rem;
     }
     
-    .about-image img {
+    .about-image > img {
         height: 250px;
     }
     

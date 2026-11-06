@@ -1,6 +1,10 @@
 # Mahajan God Idols Dresses Stitching (Vastra) - Divine Website
 
-## 🕉️ Project Overview
+<p align="center">
+  <img src="images/brand-logo.png" alt="Mahajan Vastra logo" width="180">
+</p>
+
+## Project Overview
 A complete, ready-to-publish spiritual website for Mahajan God Idols Dresses Stitching (Vastra) in Pathankot, Punjab. This website features a devotional theme with modern functionality, mobile-first design, and local SEO optimization.
 
 ## ✨ Features Implemented
